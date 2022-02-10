@@ -12,10 +12,10 @@ namespace Factory.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Shift
+    public partial class shift
     {
         public int ID { get; set; }
-        public System.DateTime Date { get; set; }
+        public string Date { get; set; }
         public int Start_time { get; set; }
         public int End_time { get; set; }
     }

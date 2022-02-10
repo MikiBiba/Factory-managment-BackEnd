@@ -13,10 +13,10 @@ namespace Factory.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class FactoryDBEntities : DbContext
+    public partial class FactoryDBEntitie : DbContext
     {
-        public FactoryDBEntities()
-            : base("name=FactoryDBEntities")
+        public FactoryDBEntitie()
+            : base("name=FactoryDBEntitie")
         {
         }
     
@@ -25,10 +25,10 @@ namespace Factory.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<DepartmentsTbl> DepartmentsTbls { get; set; }
+        public virtual DbSet<Department> Departments { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<EmployeeShift> EmployeeShifts { get; set; }
-        public virtual DbSet<EmployeesTbl> EmployeesTbls { get; set; }
-        public virtual DbSet<Shift> Shifts { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<shift> shifts { get; set; }
     }
 }

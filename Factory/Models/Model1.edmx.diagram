@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ebc047ae2d5d47e5975106ffc2347fd2" Name="Diagram1">
-        <EntityTypeShape EntityType="FactoryDBModel.DepartmentsTbl" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FactoryDBModel.EmployeeShift" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FactoryDBModel.EmployeesTbl" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FactoryDBModel.Shift" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+      <Diagram DiagramId="64433338046c4d0885570d6dd6d85074" Name="Diagram1" ZoomLevel="75">
+        <EntityTypeShape EntityType="FactoryDBModel.Department" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FactoryDBModel.Employee" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FactoryDBModel.EmployeeShift" Width="1.5" PointX="6.75" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FactoryDBModel.User" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FactoryDBModel.ShiftModel" Width="1.5" PointX="2.75" PointY="3.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

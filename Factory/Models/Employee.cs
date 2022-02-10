@@ -12,10 +12,12 @@ namespace Factory.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DepartmentsTbl
+    public partial class Employee
     {
         public int ID { get; set; }
-        public string Name { get; set; }
-        public int Manager { get; set; }
+        public string First_name { get; set; }
+        public string Last_name { get; set; }
+        public int Start_work_year { get; set; }
+        public int DepartmentID { get; set; }
     }
 }

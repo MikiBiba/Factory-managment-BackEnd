@@ -7,33 +7,29 @@ using System.Web.Http;
 
 using Factory.Models;
 
+using System.Web.Http.Cors;
+
 namespace Factory.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class EmployeeController : ApiController
     {
         // GET: api/Employee
-        private static EmployeeBL empBL = new EmployeeBL();
-        public List<EmployeesTbl> Get()
+        public static EmployeeBL empBL = new EmployeeBL();
+        public List<EmployeeWithShiftsModel> Get()
         {
-            return empBL.GetEmployees();
+            return empBL.getEmployees();
         }
 
-        // GET: api/Employee/5
-        public EmployeesTbl Get(int id)
+        public EmployeeWithShiftsModel Get(int id)
         {
-            return empBL.GetEmployee(id);
-        }
-
-        // POST: api/Employee
-        public string Post(EmployeesTbl emp)
-        {
-            return empBL.AddEmployee(emp);
+            return empBL.getEmployee(id);
         }
 
         // PUT: api/Employee/5
-        public string Put(int id, EmployeesTbl emp)
+        public string Put(int id, EmployeeWithShiftsModel dep)
         {
-            return empBL.UpdateEmployee(id, emp);
+            return empBL.UpdateEmployee(id, dep);
         }
 
         // DELETE: api/Employee/5

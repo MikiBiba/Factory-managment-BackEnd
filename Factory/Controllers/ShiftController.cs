@@ -5,31 +5,36 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
+using System.Web.Http.Cors;
+
 using Factory.Models;
 
 
 
 namespace Factory.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ShiftController : ApiController
     {
         // GET: api/Shift
-        private static  ShiftBL shfBL = new ShiftBL();
-        public List<Shift> Get()
+        public static ShiftsBL shBL  = new ShiftsBL();
+        public List<ShiftsWithEmployeesModel> Get()
         {
-            return shfBL.GetShifts();
+            return shBL.getShifts();
         }
 
-        // GET: api/Shift/5
-        public Shift Get(int id)
+        public ShiftsWithEmployeesModel Get(int id)
         {
-            return shfBL.GetShift(id);
+            return shBL.getShift(id);
         }
 
-        // POST: api/Shift
-        public string Post(Shift shft)
+        // POST: api/Shift/5
+        public string Post(ShiftsWithEmployeesModel shift)
         {
-            return shfBL.AddShift(shft);
+             return shBL.AddShift(shift);
         }
+
     }
+
+    
 }

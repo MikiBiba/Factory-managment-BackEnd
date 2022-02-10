@@ -5,10 +5,12 @@ using System.Web;
 
 namespace Factory.Models
 {
-    public class DepartmentsWithManagers
+    public class DepWithManagerModel
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public EmployeesTbl Manager { get; set; }
+        public Employee Manager { get; set; }
+        public List<Employee> Employees { get; set;}
+
     }
 }

@@ -7,54 +7,74 @@ namespace Factory.Models
 {
     public class EmployeeBL
     {
-        FactoryDBEntities db = new FactoryDBEntities();
-
-        public List<EmployeesTbl> GetEmployees()
+        FactoryDBEntitie db = new FactoryDBEntitie();
+        public List<EmployeeWithShiftsModel> getEmployees()
         {
-            return db.EmployeesTbls.ToList();
+            List<EmployeeWithShiftsModel> employees = new List<EmployeeWithShiftsModel>();
+
+            foreach (var emp in db.Employees)
+            {
+                EmployeeWithShiftsModel newEmployeeModel = new EmployeeWithShiftsModel();
+
+                newEmployeeModel.ID = emp.ID;
+                newEmployeeModel.First_name = emp.First_name;
+                newEmployeeModel.Last_name = emp.Last_name;
+                newEmployeeModel.Start_work_year = emp.Start_work_year;
+                newEmployeeModel.DepartmentID = emp.DepartmentID;
+                newEmployeeModel.Shifts = new List<shift>();
+
+                var ShiftsRegistered = db.EmployeeShifts.Where(x => x.EmployeeID == emp.ID);
+
+                foreach (var item in ShiftsRegistered)
+                {
+                    var shiftID = item.ShiftID;
+                    var RegisteredShift = db.shifts.Where(x => x.ID == shiftID).First();
+                    newEmployeeModel.Shifts.Add(RegisteredShift);
+                }
+                employees.Add(newEmployeeModel);
+            }
+            return employees;
+        }
+
+        public EmployeeWithShiftsModel getEmployee(int id)
+        {
+            return getEmployees().Where(x => x.ID == id).First();
         }
 
 
-        public EmployeesTbl GetEmployee(int id)
+        public string UpdateEmployee(int id, EmployeeWithShiftsModel emp)
         {
-            return db.EmployeesTbls.Where(x => x.ID == id).First();
-        }
+            var resultEmp = db.Employees.Where(x => x.ID == id).First();
 
-        public string AddEmployee(EmployeesTbl emp)
-        {
-            db.EmployeesTbls.Add(emp);
+            emp.ID = resultEmp.ID;
+            emp.First_name = resultEmp.First_name;
+            emp.Last_name = resultEmp.Last_name;
+            emp.DepartmentID = resultEmp.DepartmentID;
 
             db.SaveChanges();
 
-            return "Created";
-
-
-        }
-
-        public string UpdateEmployee(int id, EmployeesTbl emp)
-        {
-            var emp1 = db.EmployeesTbls.Where(x => x.ID == id).First();
-
-            emp1.ID = emp.ID;
-            emp1.First_name = emp.First_name;
-            emp1.Last_name = emp.Last_name;
-            emp1.Start_work_year = emp.Start_work_year;
-            emp1.DepartmentID = emp.DepartmentID;
-
-            db.SaveChanges();
-
-            return "Updated";
-
+            return "Updated!";
         }
 
         public string DeleteEmployee(int id)
         {
-            var e = db.EmployeesTbls.Where(x => x.ID == id).First();
-            db.EmployeesTbls.Remove(e);
+            var resultEmp = db.Employees.Where(x => x.ID == id).First();
+
+            db.Employees.Remove(resultEmp);
+
+            foreach (var item in db.EmployeeShifts)
+            {
+
+                if (item.EmployeeID == id)
+                {
+                    db.EmployeeShifts.Remove(item);
+                }
+            }
 
             db.SaveChanges();
-            return "Deleted";
-        }
 
+            return "Deleted!";
+
+        }
     }
 }
