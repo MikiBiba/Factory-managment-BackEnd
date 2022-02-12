@@ -18,18 +18,18 @@ namespace Factory.Controllers
     {
         // GET: api/Shift
         public static ShiftsBL shBL  = new ShiftsBL();
-        public List<ShiftsWithEmployeesModel> Get()
+        public List<ShiftsExtendedModel> Get()
         {
             return shBL.getShifts();
         }
 
-        public ShiftsWithEmployeesModel Get(int id)
+        public ShiftsExtendedModel Get(int id)
         {
             return shBL.getShift(id);
         }
 
         // POST: api/Shift/5
-        public string Post(ShiftsWithEmployeesModel shift)
+        public string Post(ShiftsExtendedModel shift)
         {
              return shBL.AddShift(shift);
         }

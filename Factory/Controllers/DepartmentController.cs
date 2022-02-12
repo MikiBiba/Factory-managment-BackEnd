@@ -17,25 +17,25 @@ namespace Factory.Controllers
 
         DepartmentsBL depBL = new DepartmentsBL();
         // GET: api/Department
-        public List<DepWithManagerModel> Get()
+        public List<DepExtendedModel> Get()
         {
             return depBL.getDepartments();
         }
 
         // GET: api/Department/5
-        public DepWithManagerModel Get(int id)
+        public DepExtendedModel Get(int id)
         {
             return depBL.getDepartment(id);
         }
 
         // POST: api/Department
-        public string Post(DepWithManagerModel dep)
+        public string Post(DepExtendedModel dep)
         {
             return depBL.AddDepartment(dep);    
         }
 
         // PUT: api/Department/5
-        public string Put(int id, DepWithManagerModel dep)
+        public string Patch(int id, DepExtendedModel dep)
         {
             return depBL.UpdateDepartment(id, dep); 
         }

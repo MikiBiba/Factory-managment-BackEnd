@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Factory.Models
 {
-    public class ShiftsWithEmployeesModel
+    public class ShiftsExtendedModel
     {
         public int ID { get; set; }
         public string Date { get; set; }

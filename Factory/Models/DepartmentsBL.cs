@@ -9,19 +9,19 @@ namespace Factory.Models
     {
         FactoryDBEntitie db = new FactoryDBEntitie();
 
-        public List<DepWithManagerModel> getDepartments()
+        public List<DepExtendedModel> getDepartments()
         {
-            List<DepWithManagerModel> departments = new List<DepWithManagerModel>();
+            List<DepExtendedModel> departments = new List<DepExtendedModel>();
 
             foreach (var dep in db.Departments)
             {
-                DepWithManagerModel newDep =  new DepWithManagerModel(); 
+                DepExtendedModel newDep =  new DepExtendedModel(); 
                 
                 newDep.ID = dep.ID; 
                 newDep.Name = dep.Name;
                 newDep.Employees = new List<Employee>();
 
-                //
+                //Searching for employees that are not managers
                 var deps = db.Departments;
 
                 foreach (var emp in db.Employees)
@@ -57,7 +57,7 @@ namespace Factory.Models
             return departments;
         }
 
-        public DepWithManagerModel getDepartment(int id)
+        public DepExtendedModel getDepartment(int id)
         {
             return getDepartments().Where(x => x.ID == id).First();
 
@@ -66,7 +66,7 @@ namespace Factory.Models
 
         }
 
-        public string AddDepartment(DepWithManagerModel dep)
+        public string AddDepartment(DepExtendedModel dep)
         {
             Department newDep = new Department();
 
@@ -81,12 +81,12 @@ namespace Factory.Models
 
         }
 
-        public string UpdateDepartment(int id, DepWithManagerModel dep)
+        public string UpdateDepartment(int id, DepExtendedModel dep)
         {
             var resultDep = db.Departments.Where(x => x.ID == id).First();
 
-            dep.Name = resultDep.Name;
-            dep.Manager.ID = resultDep.Manager;
+            resultDep.Name = dep.Name;
+            resultDep.Manager = dep.Manager.ID;
 
             db.SaveChanges();
 

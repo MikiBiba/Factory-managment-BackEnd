@@ -8,13 +8,13 @@ namespace Factory.Models
     public class EmployeeBL
     {
         FactoryDBEntitie db = new FactoryDBEntitie();
-        public List<EmployeeWithShiftsModel> getEmployees()
+        public List<EmpExtendedModel> getEmployees()
         {
-            List<EmployeeWithShiftsModel> employees = new List<EmployeeWithShiftsModel>();
+            List<EmpExtendedModel> employees = new List<EmpExtendedModel>();
 
             foreach (var emp in db.Employees)
             {
-                EmployeeWithShiftsModel newEmployeeModel = new EmployeeWithShiftsModel();
+                EmpExtendedModel newEmployeeModel = new EmpExtendedModel();
 
                 newEmployeeModel.ID = emp.ID;
                 newEmployeeModel.First_name = emp.First_name;
@@ -22,7 +22,9 @@ namespace Factory.Models
                 newEmployeeModel.Start_work_year = emp.Start_work_year;
                 newEmployeeModel.DepartmentID = emp.DepartmentID;
                 newEmployeeModel.Shifts = new List<shift>();
+                newEmployeeModel.Departments = new List<Department>();
 
+                //searching for all employee shifts
                 var ShiftsRegistered = db.EmployeeShifts.Where(x => x.EmployeeID == emp.ID);
 
                 foreach (var item in ShiftsRegistered)
@@ -32,24 +34,35 @@ namespace Factory.Models
                     newEmployeeModel.Shifts.Add(RegisteredShift);
                 }
                 employees.Add(newEmployeeModel);
+
+                //searching for all employee departments
+                var dep = db.Departments.Where(x => x.ID == emp.DepartmentID).First();
+                newEmployeeModel.Departments.Add(dep);
+
+
             }
             return employees;
         }
 
-        public EmployeeWithShiftsModel getEmployee(int id)
+        public EmpExtendedModel getEmployee(int id)
         {
             return getEmployees().Where(x => x.ID == id).First();
         }
 
 
-        public string UpdateEmployee(int id, EmployeeWithShiftsModel emp)
+        public string UpdateEmployee(int id, EmpExtendedModel emp)
         {
             var resultEmp = db.Employees.Where(x => x.ID == id).First();
 
-            emp.ID = resultEmp.ID;
-            emp.First_name = resultEmp.First_name;
-            emp.Last_name = resultEmp.Last_name;
-            emp.DepartmentID = resultEmp.DepartmentID;
+            emp.ID = emp.ID;
+            resultEmp.First_name = emp.First_name;
+            resultEmp.Last_name = emp.Last_name;
+            resultEmp.Start_work_year = emp.Start_work_year;
+
+           var dep = db.Departments.Where(x => x.Name == emp.DepName).First();
+
+            resultEmp.DepartmentID = dep.ID;
+
 
             db.SaveChanges();
 

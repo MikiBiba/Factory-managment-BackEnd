@@ -16,18 +16,18 @@ namespace Factory.Controllers
     {
         // GET: api/Employee
         public static EmployeeBL empBL = new EmployeeBL();
-        public List<EmployeeWithShiftsModel> Get()
+        public List<EmpExtendedModel> Get()
         {
             return empBL.getEmployees();
         }
 
-        public EmployeeWithShiftsModel Get(int id)
+        public EmpExtendedModel Get(int id)
         {
             return empBL.getEmployee(id);
         }
 
         // PUT: api/Employee/5
-        public string Put(int id, EmployeeWithShiftsModel dep)
+        public string Patch(int id, EmpExtendedModel dep)
         {
             return empBL.UpdateEmployee(id, dep);
         }

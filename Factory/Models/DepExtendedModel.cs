@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Factory.Models
 {
-    public class DepWithManagerModel
+    public class DepExtendedModel
     {
         public int ID { get; set; }
         public string Name { get; set; }

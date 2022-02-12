@@ -9,13 +9,13 @@ namespace Factory.Models
     {
         FactoryDBEntitie db = new FactoryDBEntitie();
 
-        public List<ShiftsWithEmployeesModel> getShifts()
+        public List<ShiftsExtendedModel> getShifts()
         {
-            List<ShiftsWithEmployeesModel> shfts = new List<ShiftsWithEmployeesModel>();
+            List<ShiftsExtendedModel> shfts = new List<ShiftsExtendedModel>();
 
             foreach (var item in db.shifts)
             {
-                ShiftsWithEmployeesModel newShiftModel = new ShiftsWithEmployeesModel();
+                ShiftsExtendedModel newShiftModel = new ShiftsExtendedModel();
 
                 newShiftModel.ID = item.ID;
                 newShiftModel.Date = item.Date;
@@ -36,13 +36,13 @@ namespace Factory.Models
             return shfts;
         }
 
-        public ShiftsWithEmployeesModel getShift(int id)
+        public ShiftsExtendedModel getShift(int id)
         {
             return getShifts().Where(x => x.ID == id).First();
         }
 
 
-        public string AddShift(ShiftsWithEmployeesModel shft)
+        public string AddShift(ShiftsExtendedModel shft)
         {
             shift newShift = new shift();
 
