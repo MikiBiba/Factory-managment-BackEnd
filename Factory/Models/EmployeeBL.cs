@@ -63,7 +63,6 @@ namespace Factory.Models
 
             resultEmp.DepartmentID = dep.ID;
 
-
             db.SaveChanges();
 
             return "Updated!";
@@ -86,8 +85,7 @@ namespace Factory.Models
 
             db.SaveChanges();
 
-            return "Deleted!";
-
+           return "Deleted!";
         }
     }
 }

@@ -41,7 +41,6 @@ namespace Factory.Models
             return getShifts().Where(x => x.ID == id).First();
         }
 
-
         public string AddShift(ShiftsExtendedModel shft)
         {
             shift newShift = new shift();
@@ -55,7 +54,6 @@ namespace Factory.Models
             db.SaveChanges();
 
             return "Created";
-
         }
     }
 }

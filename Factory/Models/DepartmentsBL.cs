@@ -29,41 +29,29 @@ namespace Factory.Models
                     var isManager = false;
                     foreach (var dep1 in deps)
                     {
-                        if(dep1.Manager == emp.ID)
+                        if (dep1.Manager == emp.ID)
                         {
-                            isManager = true;  
+                            isManager = true;
                         }
-
                     }
-
                     if (!isManager)
                     {
                         newDep.Employees.Add(emp);
-                    }
-                   
+                    }                 
                 }
-
-                
-
 
                 var mngr = db.Employees.Where(x => x.ID == dep.Manager).First();
 
                 newDep.Manager = mngr;
 
-                departments.Add(newDep);             
-
+                departments.Add(newDep);            
             }
-
             return departments;
         }
 
         public DepExtendedModel getDepartment(int id)
         {
             return getDepartments().Where(x => x.ID == id).First();
-
-
-
-
         }
 
         public string AddDepartment(DepExtendedModel dep)
@@ -78,7 +66,6 @@ namespace Factory.Models
             db.SaveChanges();
 
             return "Created!";
-
         }
 
         public string UpdateDepartment(int id, DepExtendedModel dep)
@@ -91,7 +78,6 @@ namespace Factory.Models
             db.SaveChanges();
 
             return "Updated!";
-
         }
 
         public string DeleteDepartment(int id)
@@ -103,9 +89,6 @@ namespace Factory.Models
             db.SaveChanges();
 
             return "Deleted!";
-
         }
-
-
     }
 }
