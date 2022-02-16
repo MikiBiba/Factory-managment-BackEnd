@@ -82,13 +82,22 @@ namespace Factory.Models
 
         public string DeleteDepartment(int id)
         {
-            var resultDep = db.Departments.Where(x => x.ID == id).First();
 
-            db.Departments.Remove(resultDep);
-            
-            db.SaveChanges();
+            foreach (var item in db.Employees)
+            {
+                if(item.DepartmentID != id)
+                {
+                    var resultDep = db.Departments.Where(x => x.ID == id).First();
 
-            return "Deleted!";
+                    db.Departments.Remove(resultDep);
+
+                    db.SaveChanges();
+
+                    return "Deleted!";
+                }                                              
+            }
+            return "You can't delete department with registered employees!";
+
         }
     }
 }

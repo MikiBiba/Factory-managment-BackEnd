@@ -23,6 +23,7 @@ namespace Factory.Models
                 newEmployeeModel.DepartmentID = emp.DepartmentID;
                 newEmployeeModel.Shifts = new List<shift>();
                 newEmployeeModel.Departments = new List<Department>();
+                
 
                 //searching for all employee shifts
                 var ShiftsRegistered = db.EmployeeShifts.Where(x => x.EmployeeID == emp.ID);
@@ -38,6 +39,9 @@ namespace Factory.Models
                 //searching for all employee departments
                 var dep = db.Departments.Where(x => x.ID == emp.DepartmentID).First();
                 newEmployeeModel.Departments.Add(dep);
+
+                //serching for employee's department name
+
 
 
             }
@@ -70,22 +74,34 @@ namespace Factory.Models
 
         public string DeleteEmployee(int id)
         {
-            var resultEmp = db.Employees.Where(x => x.ID == id).First();
 
-            db.Employees.Remove(resultEmp);
 
-            foreach (var item in db.EmployeeShifts)
+            foreach (var item in db.Departments)
             {
-
-                if (item.EmployeeID == id)
+                if (item.Manager == id)
                 {
-                    db.EmployeeShifts.Remove(item);
+                    return "This Employee is manager, please switch manager first!";
+                }
+                else
+                {
+                    var resultEmp = db.Employees.Where(x => x.ID == id).First();
+
+                    db.Employees.Remove(resultEmp);
+
+                    foreach (var emp in db.EmployeeShifts)
+                    {
+
+                        if (emp.EmployeeID == id)
+                        {
+                            db.EmployeeShifts.Remove(emp);
+                        }
+                    }
                 }
             }
 
             db.SaveChanges();
 
-           return "Deleted!";
+           return "Deleted!"; 
         }
     }
 }
