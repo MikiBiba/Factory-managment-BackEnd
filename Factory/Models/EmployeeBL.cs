@@ -58,7 +58,7 @@ namespace Factory.Models
         {
             var resultEmp = db.Employees.Where(x => x.ID == id).First();
 
-            emp.ID = emp.ID;
+            resultEmp.ID = id;
             resultEmp.First_name = emp.First_name;
             resultEmp.Last_name = emp.Last_name;
             resultEmp.Start_work_year = emp.Start_work_year;

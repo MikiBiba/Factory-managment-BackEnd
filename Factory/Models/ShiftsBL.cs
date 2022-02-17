@@ -53,6 +53,16 @@ namespace Factory.Models
 
             db.SaveChanges();
 
+            EmployeeShift empShift = new EmployeeShift();
+
+            empShift.ShiftID = newShift.ID;
+            empShift.EmployeeID = shft.EmployeeID;
+
+            db.EmployeeShifts.Add(empShift);
+
+            db.SaveChanges();
+
+
             return "Created";
         }
     }

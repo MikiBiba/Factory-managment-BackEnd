@@ -12,5 +12,7 @@ namespace Factory.Models
         public int Start_time { get; set; }
         public int End_time { get; set; }
         public List<Employee> Employees { get; set;}
+
+        public int EmployeeID { get; set; } 
     }
 }
