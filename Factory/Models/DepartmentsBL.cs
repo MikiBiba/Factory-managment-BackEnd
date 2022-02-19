@@ -65,6 +65,11 @@ namespace Factory.Models
 
             db.SaveChanges();
 
+            var emp = db.Employees.Where(x => x.ID == newDep.Manager).First();
+            emp.DepartmentID = newDep.ID;
+
+            db.SaveChanges();
+
             return "Created!";
         }
 
@@ -74,6 +79,7 @@ namespace Factory.Models
 
             resultDep.Name = dep.Name;
             resultDep.Manager = dep.Manager.ID;
+
 
             db.SaveChanges();
 
@@ -85,19 +91,18 @@ namespace Factory.Models
 
             foreach (var item in db.Employees)
             {
-                if(item.DepartmentID != id)
+                if(item.DepartmentID == id)
                 {
-                    var resultDep = db.Departments.Where(x => x.ID == id).First();
-
-                    db.Departments.Remove(resultDep);
-
-                    db.SaveChanges();
-
-                    return "Deleted!";
-                }                                              
+                    return "You can't delete department with registered employees!";
+                }
             }
-            return "You can't delete department with registered employees!";
+            var resultDep = db.Departments.Where(x => x.ID == id).First();
 
+            db.Departments.Remove(resultDep);
+
+            db.SaveChanges();
+
+            return "Deleted!";
         }
     }
 }
