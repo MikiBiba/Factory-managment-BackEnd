@@ -22,12 +22,10 @@ namespace Factory.Models
                 newDep.Employees = new List<Employee>();
 
                 //Searching for employees that are not managers
-                var deps = db.Departments;
-
                 foreach (var emp in db.Employees)
                 {
                     var isManager = false;
-                    foreach (var dep1 in deps)
+                    foreach (var dep1 in db.Departments)
                     {
                         if (dep1.Manager == emp.ID)
                         {
@@ -79,6 +77,12 @@ namespace Factory.Models
 
             resultDep.Name = dep.Name;
             resultDep.Manager = dep.Manager.ID;
+
+
+            db.SaveChanges();
+
+            var emp = db.Employees.Where(x => x.ID == resultDep.Manager).First();
+            emp.DepartmentID = id;
 
 
             db.SaveChanges();
